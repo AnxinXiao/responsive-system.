@@ -30,7 +30,7 @@ export function computed(getterOrOptions) {
 
   const effectFn = effect(getter, {
     lazy: true, // 懒执行，第一次不执行，只有当读取 value 属性时，才会执行
-    shcheduler() {
+    scheduler() {
       // 监听到依赖发生变化，重新计算
       dirty = true;
       trigger(obj, TriggerOpTypes.SET, "value"); // 触发依赖

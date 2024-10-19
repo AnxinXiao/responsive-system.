@@ -32,10 +32,10 @@ export default function (target, type, key) {
   for (const effectFn of effectFns) {
     // 找到依赖函数，遍历它们并执行。
     if (effectFn === activeEffect) continue;
-    if (effectFn.options && effectFn.options.shcheduler) {
-      // effectFn 有 shcheduler 选项，则调用用户提供的调度函数；否则直接执行 effectFn。
+    if (effectFn.options && effectFn.options.scheduler) {
+      // effectFn 有 scheduler 选项，则调用用户提供的调度函数；否则直接执行 effectFn。
       // 说明用户传递了回调函数，用户期望自己来处理依赖的函数
-      effectFn.options.shcheduler(effectFn);
+      effectFn.options.scheduler(effectFn);
     } else {
       // 执行依赖函数
       effectFn();

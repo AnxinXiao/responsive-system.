@@ -1,32 +1,17 @@
 // 测试文件
 import { reactive } from "./reactive.js";
+import { computed } from "./computed.js";
 import { effect } from "./effect/effect.js";
-import { lazy } from "react";
 
-const obj = {
+
+const obj = reactive({
   a: 1,
-  b: 2,
-};
+  b: 18,
+});
 
-const state = reactive(obj);
+const sum = computed(() => obj.a + obj.b);
 
-function fn() {
-  console.log('fn');
-  console.log(state.a)+1;
-}
-let isRun = false;
-const effectFn = effect(fn,{
-  lazy:true,
-  scheduler(eff){
-    isRun = true
-    eff()
-  }
-})
-effectFn(fn)
-
-state.a++
-state.a++
-state.a++
-state.a++
-state.a++
-
+effect(() => {
+  console.log('render',sum.value);
+});
+obj.a = 2;
